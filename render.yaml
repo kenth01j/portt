@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: portfolio-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: portfolio-uploads
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: BACKEND_PUBLIC_URL
+        sync: false
+      - key: UPLOAD_DIR
+        value: /var/data/portfolio-uploads
